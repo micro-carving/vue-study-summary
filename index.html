@@ -2,34 +2,44 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Vue学习</title>
 
 </head>
 <body>
-<div id="app">
-    <ul>
-        <li v-for="book in books">{{book.name}}</li>
-    </ul>
-</div>
-<!-- 1. 引用 Vue -->
-<!-- Vue CDN - 提供 Vue 服务 -->
-<script src="https://cdn.bootcss.com/vue/2.5.21/vue.js"></script>
-<!-- Vue Router CDN - 管理路由 -->
-<script src="https://cdn.bootcss.com/vue-router/3.0.2/vue-router.js"></script>
-<!-- Axios CDN - 调用接口 -->
-<script src="https://cdn.bootcss.com/axios/0.18.0/axios.js"></script>
+    <!-- 2. Vue 挂载点 - Vue 的虚拟 DOM 在这里操作到实际渲染 -->
+    <!-- 简单理解为 jQuery 的拼接字符串（并不全是） -->
+    <div id="app">
+        <ul>
+            <li v-for="book in books">{{book.name}}</li>
+        </ul>
+    </div>
+    <!-- 1. 引用 Vue -->
+    <!-- Vue CDN - 提供 Vue 服务 -->
+    <script src="https://cdn.bootcss.com/vue/2.5.21/vue.js"></script>
+    <!-- Vue Router CDN - 管理路由 -->
+    <script src="https://cdn.bootcss.com/vue-router/3.0.2/vue-router.js"></script>
+    <!-- Axios CDN - 调用接口 -->
+    <script src="https://cdn.bootcss.com/axios/0.18.0/axios.js"></script>
 
-<script>
-    new Vue({
-        el: '#app',
-        data: {
-            books: [
-                {name: '《Vue.js实战》'},
-                {name: '《JavaScript语言精粹》'},
-                {name: '《JavaScript高级程序设计》'}
-            ]
-        }
-    })
-</script>
+    <script>
+        new Vue({
+            // 3. el - 挂载目标，即渲染在哪个挂载点
+            el: '#app',
+            // 4. template - 模板，即渲染到挂载点的内容
+            // 最外层必须有一层包裹，例如 <div>
+            // template: `
+            //     <div>
+            //         <p>Hello World</p>
+            //     </div>
+            // `,
+            data: {
+                books: [
+                    {name: '《Vue.js实战》'},
+                    {name: '《JavaScript语言精粹》'},
+                    {name: '《JavaScript高级程序设计》'}
+                ]
+            }
+        })
+    </script>
 </body>
 </html>
