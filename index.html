@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+<div id="app">
+    <ul>
+        <li v-for="book in books">{{book.name}}</li>
+    </ul>
+</div>
+<!-- 1. 引用 Vue -->
+<!-- Vue CDN - 提供 Vue 服务 -->
+<script src="https://cdn.bootcss.com/vue/2.5.21/vue.js"></script>
+<!-- Vue Router CDN - 管理路由 -->
+<script src="https://cdn.bootcss.com/vue-router/3.0.2/vue-router.js"></script>
+<!-- Axios CDN - 调用接口 -->
+<script src="https://cdn.bootcss.com/axios/0.18.0/axios.js"></script>
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            books: [
+                {name: '《Vue.js实战》'},
+                {name: '《JavaScript语言精粹》'},
+                {name: '《JavaScript高级程序设计》'}
+            ]
+        }
+    })
+</script>
+</body>
+</html>
