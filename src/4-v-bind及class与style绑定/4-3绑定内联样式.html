@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue学习</title>
+
+</head>
+<body>
+<div id="app">
+    <div :style="{'color': color, 'fontSize': fontSize + 'px'}">文本</div>
+    <div :style="style">文本</div>
+    <div :style="[styleA, styleB]">文本</div>
+</div>
+
+<!--自动识别最新稳定版本的Vue.js -->
+<!--<script src="https://unpkg.com/vue/dist/vue.min.js"></script>-->
+<!--指定某个具体版本的Vue.js -->
+<script src="https://unpkg.com/vue@2.5.21/dist/vue.min.js"></script>
+
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            color: 'red',
+            fontSize: 14,
+            style: {
+                color: 'green',
+                fontSize: 14 + 'px'
+            },
+            styleA: {
+                color: 'blue'
+            },
+            styleB: {
+                fontSize: 16 + 'px'
+            }
+        }
+    })
+</script>
+</body>
+</html>

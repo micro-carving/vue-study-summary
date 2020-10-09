@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue学习</title>
+
+</head>
+<body>
+<div id="app">
+    <!--使用过滤器来格式化日期-->
+    {{ date | formatDate }}
+    <!--串联-->
+    {{ message | filterA | filterB}}
+    <!--接收参数-->
+    {{ message | filterA('arg1', 'arg2')}}
+</div>
+
+<!--自动识别最新稳定版本的Vue.js -->
+<!--<script src="https://unpkg.com/vue/dist/vue.min.js"></script>-->
+<!--指定某个具体版本的Vue.js -->
+<script src="https://unpkg.com/vue@2.5.21/dist/vue.min.js"></script>
+
+
+<script>
+    // 在月份、日期、小时等小于10时前面补0
+    let padDate = function (value) {
+        return value < 10 ? '0' + value : value;
+    }
+    new Vue({
+        el: '#app',
+        data: {
+            date: new Date()
+        },
+        filters: {
+            formatDate: function (value) {
+                let date = new Date(value);
+                // 获取年份
+                let year = date.getFullYear();
+                // 获取月份，此处需要+1，下标是从0开始，对应1月份
+                let month = padDate(date.getMonth() + 1);
+                // 获取日期，注意是getDate方法，而不是getDay（获取星期）方法
+                let day = padDate(date.getDate());
+                // 获取小时
+                let hours = padDate(date.getHours());
+                // 获取分钟
+                let minutes = padDate(date.getMinutes());
+                // 获取秒数
+                let seconds = padDate(date.getSeconds());
+                date.toLocaleString();
+                // 格式化日期
+                return year + '-' + month + '-' + day + ' ' + hours + ':' + minutes + ':' + seconds;
+            }
+        },
+        mounted: function () {
+            // 声明一个变量指向vue实例this，保证作用域一直
+            let _this = this;
+            // 定时器，每一秒执行一次
+            this.timer = setInterval(function () {
+                // 修改时间date
+                _this.date = new Date();
+            }, 1000);
+        },
+        beforeDestroy: function () {
+            if (this.timer) {
+                // 在vue实例销毁前，清除我们定时器
+                clearInterval(this.timer);
+            }
+        }
+    })
+</script>
+</body>
+</html>

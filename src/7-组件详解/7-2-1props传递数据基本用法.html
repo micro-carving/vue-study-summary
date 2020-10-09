@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue学习</title>
+
+</head>
+<body>
+<div id="app">
+    <!--父组件通过使用props向子组件传递参数或者属性-->
+    <my-component message="来自父组件的数据"></my-component>
+    <!--props支持驼峰命名，并最终将其转为短横线分割命名-->
+    <my-component1 warning-text="提示信息"></my-component1>
+    <!--props属性使用v-model来实现父组件向子组件传递参数数据的双向绑定-->
+    <input type="text" v-model="parentMessage">
+    <my-component2 :message="parentMessage"></my-component2>
+    <!--props属性使用v-bind实现传实参，否则传递的是形参-->
+    <my-component3 message="[1,2,3]"></my-component3> <!--7-->
+    <my-component3 :message="[1,2,3]"></my-component3> <!--3-->
+</div>
+
+<!--自动识别最新稳定版本的Vue.js -->
+<!--<script src="https://unpkg.com/vue/dist/vue.min.js"></script>-->
+<!--指定某个具体版本的Vue.js -->
+<script src="https://unpkg.com/vue@2.5.21/dist/vue.min.js"></script>
+
+
+<script>
+    Vue.component('my-component', {
+       props: ['message'],
+       template: '<div>{{message}}</div>'
+    });
+    Vue.component('my-component1', {
+        props: ['warningText'],
+        template: '<div>{{warningText}}</div>'
+    });
+    Vue.component('my-component2', {
+        props: ['message'],
+        template: '<div>{{message}}</div>'
+    });
+    Vue.component('my-component3', {
+        props: ['message'],
+        template: '<div>{{message.length}}</div>'
+    });
+    let app = new Vue({
+        el: '#app',
+        data: {
+            parentMessage: ''
+        }
+    })
+</script>
+</body>
+</html>

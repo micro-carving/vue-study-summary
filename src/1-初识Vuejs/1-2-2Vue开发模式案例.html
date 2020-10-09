@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue学习</title>
+
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <li v-for="book in books">{{book.name}}</li>
+        </ul>
+    </div>
+    <!--自动识别最新稳定版本的Vue.js -->
+    <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
+    <!--指定某个具体版本的Vue.js -->
+    <!--<script src="https://unpkg.com/vue@2.5.21/dist/vue.min.js"></script>-->
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                books: [
+                    {name: '《Vue.js实战》'},
+                    {name: '《JavaScript语言精粹》'},
+                    {name: '《JavaScript高级程序设计》'}
+                ]
+            }
+        })
+    </script>
+</body>
+</html>

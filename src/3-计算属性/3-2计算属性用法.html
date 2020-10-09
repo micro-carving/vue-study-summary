@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue学习</title>
+
+</head>
+<body>
+<div id="app">
+    商品的总价：{{ computeTotalPrices }} <br>
+    姓名：{{ computedFullName }} <br>
+    <!--姓名：{{ fullName }}
+    <input type="text" v-model="fullName" placeholder="请输入你的名字">-->
+</div>
+<div id="app1">
+    原始文本：{{text}}
+</div>
+<div id="app2">
+    转换之后文本：{{reversedText}}
+</div>
+
+<!--自动识别最新稳定版本的Vue.js -->
+<!--<script src="https://unpkg.com/vue/dist/vue.min.js"></script>-->
+<!--指定某个具体版本的Vue.js -->
+<script src="https://unpkg.com/vue@2.5.21/dist/vue.min.js"></script>
+
+
+<script>
+    let app = new Vue({
+        el: '#app',
+        data: {
+            firstName: 'Jack',
+            lastName: 'Green',
+            fullName: ' ',
+            // 初始化两个商品数据
+            package1: [
+                {
+                    name: 'iPhone 8',
+                    price: 7199,
+                    count: 2
+                },{
+                    name: 'iPad',
+                    price: 2888,
+                    count: 1
+                }
+
+            ],
+            package2: [
+                {
+                    name: 'apple',
+                    price: 3,
+                    count: 5
+                },{
+                    name: 'banana',
+                    price: 2,
+                    count: 10
+                }
+            ]
+        },
+        computed: {
+            // 计算两种商品的总价格之和
+            computeTotalPrices: function () {
+                let prices = 0;
+                for (let i = 0; i < this.package1.length; i++) {
+                    prices += this.package1[i].price * this.package1[i].count;
+                }
+                for (let i = 0; i < this.package2.length; i++) {
+                    prices += this.package2[i].price * this.package2[i].count;
+                }
+                return prices;
+            },
+            computedFullName: {
+                // getter：用于读取时触发
+                get: function () {
+                    this.fullName = this.firstName + ' ' + this.lastName;
+                    return this.fullName;
+                },
+                // setter：写入时触发
+                set: function (fullName) {
+                    let names = fullName.split(' ');
+                    this.firstName = names[0];
+                    this.lastName = names[1];
+                }
+            }
+        }
+    });
+    let app1 = new Vue({
+       el: '#app1',
+       data: {
+           text: '123,456'
+       }
+    });
+    let app2 = new Vue({
+        el: '#app2',
+        computed: {
+            reversedText: function () {
+                return app1.text.split(',').reverse().join(',');
+            }
+        }
+    });
+</script>
+</body>
+</html>

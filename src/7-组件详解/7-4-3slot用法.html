@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue学习</title>
+
+</head>
+<body>
+<div id="app">
+    <!--如果父组件没有使用slot，会默认渲染子组件中slot的内容-->
+    <!--如果父组件使用了slot，显示的内容会替换掉子组件中slot的内容-->
+    <child-component>
+        <p>分发的内容</p>
+        <p>更多分发的内容</p>
+    </child-component>
+    <child-component1>
+        <h2 slot="header">标题</h2>
+        <p>正文内容</p>
+        <p>更多的正文内容</p>
+        <div slot="footer">底部信息</div>
+    </child-component1>
+</div>
+
+<!--自动识别最新稳定版本的Vue.js -->
+<!--<script src="https://unpkg.com/vue/dist/vue.min.js"></script>-->
+<!--指定某个具体版本的Vue.js -->
+<script src="https://unpkg.com/vue@2.5.21/dist/vue.min.js"></script>
+
+
+<script>
+    Vue.component('child-component',{
+        // 单个slot，<slot>中的备份内容，它的作用域是子组件本身
+        template: '\
+        <div>\
+            <slot>\
+                <p>如果父组件没有插入内容，我将作为默认出现</p>\
+            </slot>\
+        </div>'
+    });
+    new Vue({
+        el: '#app'
+    });
+
+    Vue.component('child-component1', {
+        // 具名slot，指定一个name后可以分发多个内容，具名slot可与单个slot共存
+        template: '\
+        <div class="container">\
+            <div class="header">\
+                <slot name="header"></slot>\
+            </div>\
+            <div class="main">\
+                <slot></slot>\
+            </div>\
+            <div class="footer">\
+                <slot name="footer"></slot>\
+            </div>\
+        </div>',
+    });
+    new Vue({
+        el: '#app'
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue学习</title>
+
+</head>
+<body>
+<div id="app">
+    <!--使用自定义组件的名称-->
+    <my-component></my-component>
+    <Card></Card>
+    <table>
+        <!--使用特殊属性is来挂载组件-->
+        <tbody is="my-td"></tbody>
+    </table>
+    <my-message></my-message>
+    <my-data></my-data>
+    <my-data></my-data>
+    <my-data></my-data>
+</div>
+
+<!--自动识别最新稳定版本的Vue.js -->
+<!--<script src="https://unpkg.com/vue/dist/vue.min.js"></script>-->
+<!--指定某个具体版本的Vue.js -->
+<script src="https://unpkg.com/vue@2.5.21/dist/vue.min.js"></script>
+
+
+<script>
+    let data = {
+        counter: 0
+    }
+    let child = {
+        template: '<div>局部注册组件的内容</div>'
+    }
+    // 全局注册定义组件
+    Vue.component('my-component', {
+        // 显示到自定义组件上面的内容，这里必须被一个元素包裹，否则无法渲染！
+        template: '<div>这里是组件的内容</div>'
+    });
+    Vue.component('my-td', {
+        template: '<div>表格中使用is挂载全局注册组件</div>'
+    });
+    Vue.component('my-message', {
+        template: '<div>{{message}}</div>',
+        data: function () {
+            return {
+                message: '组件内容'
+            }
+        }
+    });
+    Vue.component('my-data', {
+        template: '<button @click="counter++">{{counter}}</button>',
+        data: function () {
+            // return data;
+            return {
+                counter: 0
+            };
+        }
+    });
+    let app = new Vue({
+        el: '#app',
+        // 局部注册组件
+        components: {
+            'Card': child
+        }
+    })
+</script>
+</body>
+</html>

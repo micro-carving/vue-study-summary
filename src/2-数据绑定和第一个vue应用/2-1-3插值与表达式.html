@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue学习</title>
+
+</head>
+<body>
+<div id="app">
+    {{ book }} </br>
+    {{ date }} </br>
+    <!--能被编译-->
+    <span v-html="link">{{}}</span> </br>
+    <!--不能被编译-->
+    <span v-pre>{{不能被编译}}</span> </br>
+    <!--表达式-->
+    {{number / 10}} </br>
+    {{isOK ? '确定' : '取消'}} </br>
+    {{text.split(',').reverse().join(',')}} </br>
+    <!--以下两个会报错-->
+    <!--这是语句，不是表达式-->
+    <!--{{ var book = 'Vue.js实战' }}-->
+    <!--不能使用流控制，要使用三元运算-->
+    <!--{{ if (ok) return msg }}-->
+</div>
+
+<!--自动识别最新稳定版本的Vue.js -->
+<!--<script src="https://unpkg.com/vue/dist/vue.min.js"></script>-->
+<!--指定某个具体版本的Vue.js -->
+<script src="https://unpkg.com/vue@2.5.21/dist/vue.min.js"></script>
+
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            book: '《Vue.js实战》',
+            date: new Date(),
+            link: '<a href="#">这是一个链接</a>',
+            number: 100,
+            isOK: false,
+            text: '123,456'
+        },
+        mounted: function () {
+            // 声明一个变量指向Vue实例this,保证作用域一致
+            let _this = this;
+            // 定时器，每一秒执行一次
+            this.timer = setInterval(function () {
+                // 修改数据 date
+                _this.date = new Date();
+            }, 1000);
+        },
+        beforeDestroy: function () {
+            if (this.timer) {
+                // 在 Vue实例销毁前，清除我们的定时器
+                clearInterval(this.timer);
+            }
+        }
+    })
+</script>
+</body>
+</html>

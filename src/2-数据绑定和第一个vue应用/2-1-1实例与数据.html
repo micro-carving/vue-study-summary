@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue 示例</title>
+</head>
+<body>
+<div id="app">
+    <input type="text" v-model="name" placeholder="请输入你的名字"/>
+    <h1>你好，{{name}}</h1>
+</div>
+<script src="https://unpkg.com/vue/dist/vue.min.js"></script>
+<script>
+    let myData = {
+        a: 1
+    }
+    let app = new Vue({
+        el: document.getElementById('app'),//或者是'#app'
+        data: myData
+    })
+    console.log('app.a = ', app.a); // 1
+    //修改属性，原数据也会随之修改
+    app.a = 2;
+    console.log('myData.a = ', myData.a); // 2
+    //反之，修改原数据，Vue属性也会修改
+    myData.a = 3;
+    console.log('app.a = ', app.a); // 3
+</script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue学习</title>
+
+</head>
+<body>
+<div id="app">
+    <!--v-for遍历数组-->
+    <ul>
+        <li v-for="book in books">{{book.name}}</li>
+        <li v-for="book of books">{{book.name}}</li>
+        <!--v-for遍历数组的高级用法，包含索引值-->
+        <li v-for="(book, index) in books">{{index}} - {{book.name}}</li>
+    </ul>
+    <!--对内置标签进行v-for遍历-->
+    <ul>
+        <template v-for="book1 in books1">
+            <li>书名：{{book1.name}}</li>
+            <li>作者：{{book1.author}}</li>
+        </template>
+    </ul>
+    <!--v-for遍历对象-->
+    <span v-for="value in user">{{value}}</span>
+    <!--v-for遍历对象的高级用法，包含键值及索引值-->
+    <ul>
+        <li v-for="(value, key, index) in user">
+            {{index}} - {{key}} : {{value}}
+        </li>
+    </ul>
+    <!--v-for遍历整数-->
+    <span v-for="n in 10">{{ n }}&nbsp;</span>
+</div>
+
+<!--自动识别最新稳定版本的Vue.js -->
+<!--<script src="https://unpkg.com/vue/dist/vue.min.js"></script>-->
+<!--指定某个具体版本的Vue.js -->
+<script src="https://unpkg.com/vue@2.5.21/dist/vue.min.js"></script>
+
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            books: [
+                {name: '《Vue.js实战》'},
+                {name: '《JavaScript语言精粹》'},
+                {name: '《JavaScript高级程序设计》'}
+            ],
+            books1: [
+                {
+                    name: '《Vue.js实战》',
+                    author: '梁灏（hao）'
+                },{
+                    name: '《JavaScript语言精粹》',
+                    author: 'Douglas Crockford'
+                },{
+                    name: '《JavaScript高级程序设计》',
+                    author: 'Nicholas C.Zakas'
+                }
+            ],
+            user: {
+                name: 'Aresn',
+                gender: '男',
+                age: 26
+            }
+        }
+    })
+</script>
+</body>
+</html>

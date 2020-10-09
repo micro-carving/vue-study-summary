@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue学习</title>
+
+</head>
+<body>
+<div id="app">
+    <!--延迟同步，当失焦或回车时才更新-->
+    <input type="text" v-model.lazy="message">
+    <p>{{message}}</p>
+    <br>
+    <!--number类型的输入框，只能输入number类型的文本信息-->
+    <input type="number" v-model.number="text">
+    <p>{{typeof text}}</p>
+    <br>
+    <!--自动过滤输入的首尾空格的输入框-->
+    <input type="text" v-model.trim="message">
+    <p>{{message}}</p>
+</div>
+
+<!--自动识别最新稳定版本的Vue.js -->
+<!--<script src="https://unpkg.com/vue/dist/vue.min.js"></script>-->
+<!--指定某个具体版本的Vue.js -->
+<script src="https://unpkg.com/vue@2.5.21/dist/vue.min.js"></script>
+
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            message: '',
+            text: 123
+        }
+    })
+</script>
+</body>
+</html>

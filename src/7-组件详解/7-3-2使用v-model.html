@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue学习</title>
+
+</head>
+<body>
+<div id="app">
+    <p>总数：{{total}}</p>
+    <!--通过v-model实现子组件向父组件传递数据-->
+    <my-component v-model="total"></my-component>
+    <!--通过自定义组件实现子组件向父组件传递数据-->
+    <my-component @input="handleGetTotal"></my-component>
+    <!--自定义表单输入组件进行数据双向绑定-->
+    <button @click="handleReduce">-1</button>
+</div>
+
+<!--自动识别最新稳定版本的Vue.js -->
+<!--<script src="https://unpkg.com/vue/dist/vue.min.js"></script>-->
+<!--指定某个具体版本的Vue.js -->
+<script src="https://unpkg.com/vue@2.5.21/dist/vue.min.js"></script>
+
+
+<script>
+    Vue.component('my-component', {
+        template: '<button @click="handleClick">+1</button>',
+        data: function () {
+            return {
+                counter: 0
+            }
+        },
+        methods: {
+            handleClick: function () {
+                this.counter++;
+                this.$emit('input', this.counter);
+            }
+        }
+    });
+    Vue.component('my-component1',{
+        props: ['value'],
+        template: '<input :value="value" @input="updateValue">',
+        methods: {
+            updateValue: function (event) {
+                this.$emit('input', event.target.value);
+            }
+        }
+    });
+    new Vue({
+        el: '#app',
+        data: {
+            total: 0,
+        },
+        methods: {
+            handleGetTotal: function (total) {
+                this.total = total;
+            },
+            handleReduce: function () {
+                this.total--;
+            }
+        }
+    });
+</script>
+</body>
+</html>

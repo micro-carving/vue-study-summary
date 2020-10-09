@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue学习</title>
+
+</head>
+<body>
+<div id="app">
+    点击次数：{{counter}}
+    <button @click="counter++">+ 1</button>
+    <button @click="counter--">- 1</button>
+    <button @click="handleAdd(10)">+ 10</button>
+    <button @click="handleSub(10)">- 10</button>
+    <a href="http://www.apple.com" @click="handleClick('禁止打开', $event)">打开链接</a>
+</div>
+
+<!--自动识别最新稳定版本的Vue.js -->
+<!--<script src="https://unpkg.com/vue/dist/vue.min.js"></script>-->
+<!--指定某个具体版本的Vue.js -->
+<script src="https://unpkg.com/vue@2.5.21/dist/vue.min.js"></script>
+
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            counter: 0
+        },
+        methods: {
+            // 加法
+            handleAdd: function (count) {
+                count = count || 1;
+                // this指向当前vue实例app
+                this.counter += count;
+            },
+            // 减法
+            handleSub: function (count) {
+                // this指向当前vue实例app
+                this.counter -= count;
+            },
+            handleClick: function (message, event) {
+                // 阻止它的默认行为的发生而发生其他的事情。
+                event.preventDefault();
+                window.alert(message);
+            }
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue学习</title>
+
+</head>
+<body>
+<div id="app">
+    <p>总数：{{total}}</p>
+    <!--父组件监听子组件触发的事件-->
+    <my-component @increase="handleGetTotal"
+                  @reduce="handleGetTotal"></my-component>
+    <!--监听原生DOM事件-->
+    <my-component v-on:click.native="handleClick"></my-component>
+</div>
+
+<!--自动识别最新稳定版本的Vue.js -->
+<!--<script src="https://unpkg.com/vue/dist/vue.min.js"></script>-->
+<!--指定某个具体版本的Vue.js -->
+<script src="https://unpkg.com/vue@2.5.21/dist/vue.min.js"></script>
+
+
+<script>
+    Vue.component("my-component", {
+        template: '\
+        <div>\
+            <button @click="handleIncrease">+1</button>\
+            <button @click="handleReduce">-1</button>\
+        </div>',
+        data: function () {
+            return {
+                counter: 0
+            };
+        },
+        methods: {
+            handleIncrease: function () {
+                this.counter++;
+                // 子组件触发事件，第一个参数为自定义事件的名称，第二个参数为传递的数据
+                this.$emit('increase', this.counter);
+            },
+            handleReduce: function () {
+                this.counter--;
+                this.$emit('reduce', this.counter);
+            }
+        }
+    });
+    new Vue({
+        el: '#app',
+        data: {
+            total: 0
+        },
+        methods: {
+            handleGetTotal: function (total) {
+                this.total = total;
+            }
+        }
+    });
+</script>
+</body>
+</html>

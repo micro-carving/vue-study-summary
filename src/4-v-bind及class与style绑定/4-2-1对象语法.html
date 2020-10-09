@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue学习</title>
+
+</head>
+<body>
+<div id="app">
+    <div :class="{'active': isActive}"></div>
+    <div class="static" :class="{'active': isActive, 'error': isError}"></div>
+    <div :class="classes"></div>
+</div>
+
+<!--自动识别最新稳定版本的Vue.js -->
+<!--<script src="https://unpkg.com/vue/dist/vue.min.js"></script>-->
+<!--指定某个具体版本的Vue.js -->
+<script src="https://unpkg.com/vue@2.5.21/dist/vue.min.js"></script>
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            isActive: true,
+            error: null,
+            isError: false
+        },
+        computed: {
+            classes: function() {
+                return {
+                    active: this.isActive && !this.error,
+                    'text-fail': this.error && this.error.type === 'fail'
+                }
+            }
+        }
+    })
+</script>
+</body>
+</html>

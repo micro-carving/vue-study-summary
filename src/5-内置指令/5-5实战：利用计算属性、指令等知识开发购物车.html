@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>购物车示例</title>
+    <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+</head>
+<body>
+
+<!--此处加上v-cloak是为了防止由于网速等延迟加载的问题导致的屏幕闪动-->
+<div id="app" v-cloak>
+    <template v-if="list.length">
+        <table>
+            <!--表头-->
+            <thead>
+                <tr>
+                    <th>商品编号</th>
+                    <th>商品名称</th>
+                    <th>商品单价</th>
+                    <th>购买数量</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <!--表文本内容-->
+            <tbody>
+                <tr v-for="(item, index) in list">
+                    <td>{{ index + 1 }}</td>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.price }}</td>
+                    <td>
+                        <button @click="handleReduce(index)" :disabled="item.count === 1">-</button>
+                        {{ item.count }}
+                        <button @click="handleAdd(index)">+</button>
+                    </td>
+                    <td>
+                        <button class="handleRemoveButton" @click="handleRemove(index)">移除</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="totalPriceDiv">总价：￥ {{totalPrice}}</div>
+    </template>
+    <template v-else>购物车为空</template>
+</div>
+
+<!--自动识别最新稳定版本的Vue.js -->
+<!--<script src="../../js/vue-dist-2.6.12.js"></script>-->
+<!--指定某个具体版本的Vue.js -->
+<script src="https://unpkg.com/vue@2.5.21/dist/vue.min.js"></script>
+<script src="../../js/index.js"></script>
+</body>
+</html>

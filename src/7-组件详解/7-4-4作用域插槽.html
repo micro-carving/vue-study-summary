@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue学习</title>
+
+</head>
+<body>
+<div id="app">
+    <!--<child-component>
+        &lt;!&ndash;template部分为作用域插槽&ndash;&gt;
+        &lt;!&ndash;临时变量props，可以换成任意变量名，使用scope访问来自子组件插槽的数据msg&ndash;&gt;
+        <template scope="props">
+            <p>来组父组件的内容</p>
+            <p>{{props.msg}}</p>
+        </template>
+    </child-component>-->
+
+    <my-list :books="books">
+        <!--作用域插槽也可以是具名的slot-->
+        <template slot="book" scope="bk">
+            <li>{{bk.bookName}}</li>
+        </template>
+    </my-list>
+</div>
+
+<!--自动识别最新稳定版本的Vue.js -->
+<!--<script src="https://unpkg.com/vue/dist/vue.min.js"></script>-->
+<!--指定某个具体版本的Vue.js -->
+<script src="https://unpkg.com/vue@2.5.21/dist/vue.min.js"></script>
+
+
+<script>
+    /*Vue.component('child-component', {
+        // 子组件插槽数据msg
+        template: '\
+        <div class="container">\
+            <slot msg="来自子组件的内容"></slot>\
+        </div>'
+    });
+    new Vue({
+        el: '#app'
+    });*/
+
+    Vue.component('my-list', {
+        // 以对象的形式进行父子组件通信（父组件向子组件传递数据）
+        props: {
+            books: {
+                type: Array,
+                default: function () {
+                    return [];
+                }
+            }
+        },
+        template: '\
+        <ul>\
+            <slot name="book"\
+                v-for="book in books"\
+                :bookName="book.name">\
+                <!-- 这里也可以写默认slot内容 -->\
+            </slot>\
+        </ul>'
+    });
+    new Vue({
+        el: '#app',
+        data: {
+            books: [
+                {name: '《Vue.js实战》'},
+                {name: '《JavaScript语言精粹》'},
+                {name: '《JavaScript高级程序设计》'}
+            ]
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue 示例</title>
+</head>
+<body>
+<div id="app">
+
+</div>
+<script src="https://unpkg.com/vue/dist/vue.min.js"></script>
+<script>
+    let app = new Vue({
+        el: '#app',
+        data: {
+            a: 2
+        },
+        // 实例创建完成后调用，此阶段完成了数据的观测等，但尚未挂载，$el还不可以用。需要初始化处理一些数据时会比较有用。
+        created: function () {
+            console.log("this.a = ", this.a); // 2
+        },
+        // el挂载到实例上后调用，一般我们的第一个业务逻辑会在这里开始。
+        mounted: function () {
+            console.log(this.$el); // <div id="app"></div>
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue学习</title>
+
+</head>
+<body>
+<div id="app">
+    <!--注意，这里的reversedText是方法，所以要带()-->
+    {{reversedText()}}
+    <!--不写括号，此时页面显示function () { [native code] }-->
+    {{reversedText}}
+    <!--非响应式依赖-->
+    {{now}}
+</div>
+
+<!--自动识别最新稳定版本的Vue.js -->
+<!--<script src="https://unpkg.com/vue/dist/vue.min.js"></script>-->
+<!--指定某个具体版本的Vue.js -->
+<script src="https://unpkg.com/vue@2.5.21/dist/vue.min.js"></script>
+
+
+<script>
+    let app = new Vue({
+        el: '#app',
+        data: {
+            text: '123,456'
+        },
+        methods: {
+            reversedText: function () {
+                return this.text.split(',').reverse().join(',');
+            }
+        },
+        computed: {
+            now: function () {
+                return Date.now();
+            }
+        }
+    })
+</script>
+</body>
+</html>

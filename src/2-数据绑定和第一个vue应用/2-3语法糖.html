@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue学习</title>
+
+</head>
+<body>
+<div id="app">
+    <a v-bind:href="url">链接</a>
+    <img v-bind:src="imgUrl"/>
+    <!-- v-bind:xxx缩写为:xxx -->
+    <a :href="url">链接</a>
+    <img :src="imgUrl" />
+
+    <p v-if="show">显示这段文本</p>
+    <button v-on:click="stateHide">点击显隐这段文本</button>
+    <!-- v-on:xxx缩写为@xxx-->
+    <button @click="stateHide">点击显隐这段文本</button>
+</div>
+
+<!--自动识别最新稳定版本的Vue.js -->
+<!--<script src="https://unpkg.com/vue/dist/vue.min.js"></script>-->
+<!--指定某个具体版本的Vue.js -->
+<script src="https://unpkg.com/vue@2.5.21/dist/vue.min.js"></script>
+
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            show: true,
+            url: 'https://www.runoob.com/w3cnote/programmer-joke-25.html',
+            imgUrl: 'https://www.runoob.com/wp-content/uploads/2019/01/blm.jpeg'
+        },
+        methods: {
+            stateHide: function () {
+                this.show = !this.show; // 点击按钮切换显隐状态
+            },
+        },
+    })
+</script>
+</body>
+</html>

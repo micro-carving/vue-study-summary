@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue学习</title>
+
+</head>
+<body>
+<div id="app">
+    <!--组件数据引用于父组件数据-->
+    <my-component :init-count="1"></my-component>
+    <!--父组件的数据作为需要被转变的原始值传入-->
+    <my-component1 :width="100"></my-component1>
+</div>
+
+<!--自动识别最新稳定版本的Vue.js -->
+<!--<script src="https://unpkg.com/vue/dist/vue.min.js"></script>-->
+<!--指定某个具体版本的Vue.js -->
+<script src="https://unpkg.com/vue@2.5.21/dist/vue.min.js"></script>
+
+
+<script>
+    Vue.component('my-component', {
+        props: ['initCount'],
+        template: '<div>{{count}}</div>',
+        data: function () {
+            return {
+                // 子组件数据引用于父组件数据
+                count: this.initCount
+            }
+        }
+    });
+    Vue.component('my-component1',{
+        props: ['width'],
+        template: '<div :style="style">组件内容</div>',
+        computed: {
+            style: function () {
+                return {
+                    // 父组件的数据作为需要被转变的原始值传入
+                    width: this.width + 'px'
+                }
+            }
+        }
+    });
+    new Vue({
+        el: '#app'
+    })
+</script>
+</body>
+</html>

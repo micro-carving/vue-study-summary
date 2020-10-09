@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue学习</title>
+
+</head>
+<body>
+<div id="app">
+    <ul>
+        <span>--------------原始图书列表遍历--------------</span>
+        <template v-for="book in books">
+            <li>书名：{{book.name}}</li>
+            <li>作者：{{book.author}}</li>
+        </template>
+        <span>--------------过滤出书名含有JavaScript的书--------------</span>
+        <template v-for="book in filterBooks">
+            <li>书名：{{book.name}}</li>
+            <li>作者：{{book.author}}</li>
+        </template>
+        <span>--------------根据书名的长度进行排序--------------</span>
+        <template v-for="book in sortedBooks">
+            <li>书名：{{book.name}}</li>
+            <li>作者：{{book.author}}</li>
+        </template>
+    </ul>
+</div>
+
+<!--自动识别最新稳定版本的Vue.js -->
+<!--<script src="https://unpkg.com/vue/dist/vue.min.js"></script>-->
+<!--指定某个具体版本的Vue.js -->
+<script src="https://unpkg.com/vue@2.5.21/dist/vue.min.js"></script>
+
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            books: [
+                {
+                    name: '《Vue.js实战》',
+                    author: '梁灏（hao）'
+                }, {
+                    name: '《JavaScript语言精粹》',
+                    author: 'Douglas Crockford'
+                }, {
+                    name: '《JavaScript高级程序设计》',
+                    author: 'Nicholas C.Zakas'
+                }
+            ]
+        },
+        computed: {
+            // 过滤出书名中包含“JavaScript”的书
+            filterBooks: function () {
+                return this.books.filter(function (item) {
+                    return item.name.match(/JavaScript/);
+                });
+            },
+            // 根据书名的长度进行排序
+            sortedBooks: function () {
+                return this.books.sort((book1, book2) => {
+                    return book1.name.length > book2.name.length;
+                });
+            }
+        }
+    })
+</script>
+</body>
+</html>

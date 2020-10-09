@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue学习</title>
+
+</head>
+<body>
+<div id="app">
+    <p>status当前的值为：{{status}}</p>
+    <input type="text" v-model="status" placeholder="请输入status的值"/>
+    <p v-if="status === '1'">当status为1是显示该行</p>
+    <p v-else-if="status === '2'">当status为2时显示该行</p>
+    <p v-else>否则显示该行</p>
+    <template v-if="status === '1'">
+        <p>这是一段文本</p>
+        <p>这是一段文本</p>
+        <p>这是一段文本</p>
+    </template>
+    <template v-if="type === 'name'">
+        <label>用户名：</label>
+        <input placeholder="请输入用户名">
+    </template>
+    <template v-else>
+        <label>邮箱：</label>
+        <input placeholder="请输入邮箱">
+    </template>
+    <button @click="handleToggleClick">点击切换输入类型</button>
+    <br>
+    <template v-if="type === 'name'">
+        <label>用户名：</label>
+        <input placeholder="请输入用户名" key="name-input">
+    </template>
+    <template v-else>
+        <label>邮箱：</label>
+        <input placeholder="请输入邮箱" key="mail-input">
+    </template>
+    <button @click="handleToggleClick">点击切换输入类型</button>
+</div>
+
+<!--自动识别最新稳定版本的Vue.js -->
+<!--<script src="https://unpkg.com/vue/dist/vue.min.js"></script>-->
+<!--指定某个具体版本的Vue.js -->
+<script src="https://unpkg.com/vue@2.5.21/dist/vue.min.js"></script>
+
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            status: '1',
+            type: 'name'
+        },
+        methods: {
+            handleToggleClick: function () {
+                this.type = this.type === 'name' ? 'mail' : 'name';
+            }
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue学习</title>
+
+</head>
+<body>
+<div id="app">
+<!--    {{message1}}-->
+<!--    使用$dispatch方法底层组件向上层组件传递数据-->
+<!--    <my-component1></my-component1>-->
+<!--    使用$broadcast方法上层组件向底层组件传递数据-->
+<!--    <button @click="handleBroadcast">广播事件</button>-->
+<!--    {{message2}}-->
+<!--    <my-component2></my-component2>-->
+<!--    使用中间组件或者父链方式进行非父子组件之间的通信-->
+<!--    {{message}}-->
+<!--    <component-a></component-a>-->
+
+<!--    使用子组件索引与子组件进行通信-->
+    <button @click="handleRef">通过ref获取子组件实例</button>
+    <component-a ref="comA"></component-a>
+</div>
+
+<!--自动识别最新稳定版本的Vue.js -->
+<!--<script src="https://unpkg.com/vue/dist/vue.min.js"></script>-->
+<!--指定某个具体版本的Vue.js -->
+<script src="https://unpkg.com/vue@2.5.21/dist/vue.min.js"></script>
+<!--注意，该示例需要使用Vue.js 1.x的版本-->
+<!--<script src="https://unpkg.com/vue@1.0.1/dist/vue.min.js"></script>-->
+
+
+<script>
+    /*Vue v1.0版本中的分发与广播来实现非父子组件的通信*/
+    // Vue.component('my-component1', {
+    //     template: '<button @click="handleDispatch">派发事件</button>',
+    //     methods: {
+    //         handleDispatch: function () {
+    //             // 该方法在vue.js 1.x版本能使用
+    //             this.$dispatch('on-message1', '来自内部组件的数据');
+    //         }
+    //     }
+    // });
+    // Vue.component('my-component2', {
+    //     template: '<div>{{message2}}</div>',
+    //     data: function () {
+    //         return {
+    //             message2: ''
+    //         }
+    //     },
+    //     events: {
+    //         'on-message2': function (msg) {
+    //             this.message2 = msg;
+    //         }
+    //     }
+    // });
+    // new Vue({
+    //     el: '#app',
+    //     data: {
+    //         message1: ''
+    //     },
+    //     events: {
+    //         'on-message1': function (msg) {
+    //             this.message1 = msg;
+    //         }
+    //     },
+    //     methods: {
+    //         handleBroadcast: function () {
+    //             // 该方法在vue.js 1.x版本能使用
+    //             this.$broadcast('on-message2', '来自顶层组件的数据');
+    //         }
+    //     }
+    // });
+
+    /*通过一个中间组件（中央事件总线，空的Vue对象或者带属性的Vue对象）来实现非父子组件之间的通信*/
+    // 中央事件总线（中介）
+    // let bus = new Vue();
+    // Vue.component('component-a', {
+    //     template: '<button @click="handleEvent">传递事件</button>',
+    //     methods: {
+    //         handleEvent: function () {
+    //             bus.$emit('on-message', '来自组件component-a的内容');
+    //         }
+    //     }
+    // });
+    // new Vue({
+    //     el: "#app",
+    //     data: {
+    //         message: ''
+    //     },
+    //     mounted: function () {
+    //         let _this = this;
+    //         // 实例初始化时，监听来自bus实例的事件
+    //         bus.$on('on-message', function (msg) {
+    //             _this.message = msg;
+    //         });
+    //     }
+    // });
+
+    /*通过this.$parent方式访问父实例或组件（父链）*/
+    // Vue.component('component-a', {
+    //     template: '<button @click="handleEvent">通过父链直接修改数据</button>',
+    //     methods: {
+    //         handleEvent: function () {
+    //             // 访问到父链后，可以做任何擦澡，比如直接修改数据
+    //             this.$parent.message = '来自组件component-a的内容';
+    //         }
+    //     }
+    // });
+    // new Vue({
+    //     el: '#app',
+    //     data: {
+    //         message: ''
+    //     }
+    // });
+
+    /*通过refs方式访问子实例或组件（子组件索引）*/
+    Vue.component('component-a', {
+        template: '<div>子组件</div>',
+        data: function () {
+            return {
+                message: '子组件内容'
+            }
+        }
+    });
+    new Vue({
+        el: '#app',
+        methods: {
+            handleRef: function () {
+                // 通过$refs来访问指定的实例
+                let msg = this.$refs.comA.message;
+                console.log(msg);
+            }
+        }
+    });
+</script>
+</body>
+</html>

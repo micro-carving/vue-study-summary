@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue学习</title>
+
+</head>
+<body>
+<div id="app">
+    <child-component>
+        <h2 slot="header">标题</h2>
+        <p>正文内容</p>
+        <p>更多的正文内容</p>
+        <div slot="footer">底部信息</div>
+    </child-component>
+</div>
+
+<!--自动识别最新稳定版本的Vue.js -->
+<!--<script src="https://unpkg.com/vue/dist/vue.min.js"></script>-->
+<!--指定某个具体版本的Vue.js -->
+<script src="https://unpkg.com/vue@2.5.21/dist/vue.min.js"></script>
+
+
+<script>
+    Vue.component('child-component', {
+        template: '\
+        <div class="container">\
+            <div class="header">\
+                <!--具名slot-->\
+                <slot name="header"></slot>\
+            </div>\
+            <div class="main">\
+                <slot></slot>\
+            </div>\
+            <div class="footer">\
+                <slot name="footer"></slot>\
+            </div>\
+        </div>',
+        mounted: function () {
+            // 使用$slots访问某个具名slot
+            let header = this.$slots.header;
+            let main = this.$slots.default;
+            let footer = this.$slots.footer;
+            console.log(footer);
+            // elm可以获取原生dom的对象
+            console.log(footer[0].elm.innerHTML);
+        }
+    });
+    new Vue({
+        el: '#app'
+    })
+</script>
+</body>
+</html>

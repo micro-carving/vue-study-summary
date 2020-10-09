@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue学习</title>
+
+</head>
+<body>
+<div id="app">
+    <type-component :prop-a="a"
+                    :prop-b="b"
+                    :prop-c="c"
+                    :prop-d="d"
+                    :prop-e="e"
+                    :prop-f="f"
+                    :prop-g="g">
+    </type-component>
+</div>
+
+<!--自动识别最新稳定版本的Vue.js -->
+<!--<script src="https://unpkg.com/vue/dist/vue.min.js"></script>-->
+<!--指定某个具体版本的Vue.js -->
+<script src="https://unpkg.com/vue@2.5.21/dist/vue.min.js"></script>
+
+<script>
+    Vue.component('type-component', {
+        props: {
+            // 必须是数值类型
+            propA: Number,
+            // 必须是字符串类型或者数值类型
+            propB: [String, Number],
+            // 布尔值，如果没定义，默认值就是true
+            propC: {
+                type: Boolean,
+                default: true
+            },
+            // 数值，而且是必填项
+            propD: {
+                type: Number,
+                required: true
+            },
+            // 如果是数组或者对象，默认值必须是一个函数来返回
+            propE: {
+                type: Array,
+                default: function () {
+                    return [];
+                }
+            },
+            // 自定义一个验证函数
+            propF: {
+                validator: function (value) {
+                    return value > 10;
+                }
+            },
+            // 必须是一个函数类型
+            propG: {
+                type: Function
+            }
+        },
+        template: '<div>' +
+            '必须使用数值类型：{{propA}}<br>' +
+            '必须是字符串类型或者数值类型：{{propB}}<br>' +
+            '布尔值，如果没定义，默认值就是true：{{propC}}<br>' +
+            '数值，而且是必填项：{{propD}}<br>' +
+            '如果是数组或者对象，默认值必须是一个函数来返回：{{propE}}<br>' +
+            '自定义一个验证函数：{{propF}}<br>' +
+            '必须是一个函数类型：{{propG}}</div>'
+    });
+    new Vue({
+        el: '#app',
+        data: {
+            a: 11,
+            b: '666',
+            c: true,
+            d: 12345,
+            e: [123],
+            f: 88,
+            g: console.log('g')
+        }
+    })
+</script>
+</body>
+</html>

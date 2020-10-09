@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue学习</title>
+
+</head>
+<body>
+<div id="app">
+    原始文本：{{text}} 转换之后的文本：{{ text.split(',').reverse().join(',') }}
+    {{ reversedText }}
+</div>
+
+<!--自动识别最新稳定版本的Vue.js -->
+<!--<script src="https://unpkg.com/vue/dist/vue.min.js"></script>-->
+<!--指定某个具体版本的Vue.js -->
+<script src="https://unpkg.com/vue@2.5.21/dist/vue.min.js"></script>
+
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            text: '123,456'
+        },
+        computed: {
+            reversedText: function () {
+                // 这里的this指向的是当前的Vue实例
+                return this.text.split(',').reverse().join(',');
+            }
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue学习</title>
+
+</head>
+<body>
+<div id="app">
+    <!--阻止单击事件冒泡-->
+    <a @click.stop="handleClick('阻止单击事件冒泡', $event)">阻止单击事件冒泡</a>
+    <!--提交事件不再重载页面-->
+    <form @submit.prevent="handleClick('提交事件不再重载页面', $event)">提交事件不再重载页面</form>
+    <!--修饰符可以串联-->
+    <a @click.stop.prevent="handleClick('修饰符可以串联', $event)"></a>
+    <!--只有修饰符-->
+    <form @submit.prevent></form>
+    <!--添加事件侦听器时使用事件捕获模式-->
+    <div @click.capture="handleClick('添加事件侦听器时使用事件捕获模式', $event)">添加事件侦听器时使用事件捕获模式</div>
+    <!--只当事件在该元素本身(而不是子元素)触发时触发回调-->
+    <div @click.self="handleClick('只当事件在该元素本身(而不是子元素)触发时触发回调', $event)">只当事件在该元素本身(而不是子元素)触发时触发回调</div>
+    <!--只触发一次，组件同样适用-->
+    <div @click.once="handleClick('只触发一次，组件同样适用', $event)">只触发一次，组件同样适用</div>
+    <!--只有在keyCode是13时调用vm.submit()-->
+    <input @keyup.13="submit">
+    <!--使用自定义的配置按键-->
+    <input @keyup.f1="submit">
+    <!--Shift+S-->
+    <input @keyup.shift.83="handleSave">
+    <!-- Ctrl + Click -->
+    <div @click.ctr1="doSomething">Do something</div>
+</div>
+
+<!--自动识别最新稳定版本的Vue.js -->
+<!--<script src="https://unpkg.com/vue/dist/vue.min.js"></script>-->
+<!--指定某个具体版本的Vue.js -->
+<script src="https://unpkg.com/vue@2.5.21/dist/vue.min.js"></script>
+
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            handleClick: function (message, event) {
+                // 阻止它的默认行为的发生而发生其他的事情。
+                event.preventDefault();
+                window.alert(message);
+            }
+        }
+    });
+    // 自定义配置具体按键
+    Vue.config.keyCodes.f1 = 112;
+</script>
+</body>
+</html>

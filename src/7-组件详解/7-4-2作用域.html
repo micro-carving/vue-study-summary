@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue学习</title>
+
+</head>
+<body>
+<div id="app">
+    <child-component>
+        {{message}}
+    </child-component>
+    <!--showChild绑定的是父组件的数据-->
+    <child-component v-show="showChild"></child-component>
+    <child-component1></child-component1>
+</div>
+
+<!--自动识别最新稳定版本的Vue.js -->
+<!--<script src="https://unpkg.com/vue/dist/vue.min.js"></script>-->
+<!--指定某个具体版本的Vue.js -->
+<script src="https://unpkg.com/vue@2.5.21/dist/vue.min.js"></script>
+
+
+<script>
+    Vue.component('child-component',{
+        template: '<div>子组件</div>'
+    });
+    new Vue({
+        el: '#app',
+        data: {
+            showChild: true
+        }
+    });
+
+    Vue.component('child-component1', {
+        <!--showChild绑定的是子组件的数据-->
+        template: '<div v-show="showChild">子组件</div>',
+        data: function () {
+            return {
+                showChild: true
+            }
+        }
+    });
+    new Vue({
+        el: '#app'
+    });
+</script>
+</body>
+</html>
