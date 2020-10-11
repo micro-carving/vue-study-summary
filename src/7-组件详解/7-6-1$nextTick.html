@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue学习</title>
+
+</head>
+<body>
+<div id="app">
+    <div id="div" v-if="showDiv">这是一段文本</div>
+    <button @click="getText">获取div内容</button>
+</div>
+
+<!--自动识别最新稳定版本的Vue.js -->
+<!--<script src="https://unpkg.com/vue/dist/vue.min.js"></script>-->
+<!--指定某个具体版本的Vue.js -->
+<script src="https://unpkg.com/vue@2.5.21/dist/vue.min.js"></script>
+
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            showDiv: false
+        },
+        methods: {
+            getText: function () {
+                this.showDiv = true;
+                /*这段代码运行后在控制台会抛出一个错误: Cannot read property 'innerHTML' of null*/
+                /*此处报错涉及到vue中的“异步更新队列”，等到下一次事件循环时，才开始创建div对象*/
+                // let text = document.getElementById('div').innerHTML;
+                // console.log(text);
+                /*为了解决上述的问题，使用$nextTick方法*/
+                this.$nextTick(function () {
+                    let text = document.getElementById('div').innerHTML;
+                    console.log(text);
+                })
+            }
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue学习</title>
+
+</head>
+<body>
+<div id="mount-div">
+
+</div>
+
+<!--自动识别最新稳定版本的Vue.js -->
+<!--<script src="https://unpkg.com/vue/dist/vue.min.js"></script>-->
+<!--指定某个具体版本的Vue.js -->
+<script src="https://unpkg.com/vue@2.5.21/dist/vue.min.js"></script>
+
+
+<script>
+    /*动态创建Vue实例，使用Vue.extend和$mount两个方法来手动挂载实例*/
+    // 创建一个子类，处于未挂载的状态
+    let MyComponent = Vue.extend({
+        template: '<div>Hello: {{name}}</div>',
+        data: function () {
+            return {
+                name: 'John'
+            }
+        }
+    });
+    // 使用$mount进行手动挂载一个未挂载的实例
+    new MyComponent().$mount('#mount-div');
+    // 同上，方式一：
+    new MyComponent({
+        el: "#mount-div"
+    });
+    // 方式二：或者，在文档之外渲染并且随后挂载
+    let component = new MyComponent.$mount();
+    document.getElementById('mount-div').appendChild(component.$el);
+</script>
+</body>
+</html>

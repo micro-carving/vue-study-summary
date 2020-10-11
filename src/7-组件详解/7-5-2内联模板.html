@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue学习</title>
+
+</head>
+<body>
+<div id="app">
+    <!--通过使用inline-template特性实现内联模板-->
+    <child-component inline-template>
+        <div>
+            <h2>在父组件中定义子组件的模板</h2>
+            <p>{{message}}</p>
+            <p>{{msg}}</p>
+        </div>
+    </child-component>
+</div>
+
+<!--自动识别最新稳定版本的Vue.js -->
+<!--<script src="https://unpkg.com/vue/dist/vue.min.js"></script>-->
+<!--指定某个具体版本的Vue.js -->
+<script src="https://unpkg.com/vue@2.5.21/dist/vue.min.js"></script>
+
+
+<script>
+    Vue.component('child-component', {
+        data: function () {
+            return {
+                msg: '在子组件中声明的数据'
+            }
+        }
+    });
+    new Vue({
+        el: '#app',
+        data: {
+            message: "在父组件声明的数据"
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue学习</title>
+
+</head>
+<body>
+<div id="app">
+    <my-component></my-component>
+    <!--vue中自定义的模板方式，为了解决组件中template内容冗长、复杂等问题，在script中像写HTML那样舒服的开发，实现业务逻辑-->
+    <script type="text/x-template" id="my-component">
+        <div>这是组件的内容</div>
+    </script>
+</div>
+
+<!--自动识别最新稳定版本的Vue.js -->
+<!--<script src="https://unpkg.com/vue/dist/vue.min.js"></script>-->
+<!--指定某个具体版本的Vue.js -->
+<script src="https://unpkg.com/vue@2.5.21/dist/vue.min.js"></script>
+
+
+<script>
+    Vue.component('my-component', {
+        /*此处的红色提示不影响程序的运行*/
+        template: '#my-component'
+    });
+    new Vue({
+        el: '#app'
+    })
+</script>
+</body>
+</html>
