@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数字输入框组件</title>
+</head>
+<body>
+    <div id="app">
+        <!--注意两种方式都能实现需求，但是作用域不一样，前者作用域在于父组件，后者作用域在于子组件-->
+        <!--v-model是双向绑定数据，:value是单向数据流-->
+        <input-number v-model="value" :max="10" :min="0"></input-number>
+        <input-number :value="value" :max="10" :min="0"></input-number>
+    </div>
+    <!--注意此处js放置的先后顺序，js是同步（从上往下）执行的-->
+    <script src="https://unpkg.com/vue@2.5.21/dist/vue.min.js"></script>
+    <script src="input-number.js"></script>
+    <script src="index.js"></script>
+</body>
+</html>
